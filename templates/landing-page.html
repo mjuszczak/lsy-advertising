@@ -7,14 +7,15 @@
     </head>
     <body>
         {% if user_id %}
-        <h1>Hello, {{ user_id }}!</h1>
-        <p>Add some copy here specifically targeting user {{ user_id }}.</p>
+            <h1>Hello, {{ user_id }}!</h1>
         {% else %}
-        <h1>Hello!</h1>
-        <p>Add some copy here targeting anonymous users.</p>
+            <h1>Hello!</h1>
         {% endif %}
-        {% if is_showcase_user %}
-        <p>Add some copy here since they're a <em>showcase</em> user as well.</p>
+
+        {% if is_targeted_user %}
+            <p>This copy may be customized for VIP users.</p>
+        {% else %}
+            <p>This copy may be customized.</p>
         {% endif %}
     </body>
 </html>

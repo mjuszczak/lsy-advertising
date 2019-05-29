@@ -13,9 +13,9 @@ const baseURL = process.env.BASE_URL || '';
 // These variables can be safely removed, they are only used for demo purposes.
 const colors = {
     default: '210553',
-    showcase: 'e43362'
+    vip: 'e43362'
 }
-const showcaseUserIDs = ['123', '456'];
+const vipUserIDs = ['456', '789'];
 
 // We use nunjucks for server-side templating, feel free to replace this with your solution.
 nunjucks.configure(path.join(__dirname, 'templates'), {
@@ -29,12 +29,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // This is a helper function for user segmentation in the demo.
-function isShowcaseUser(userID) {
-    return showcaseUserIDs.indexOf(userID) != -1;
+function isVipUser(userID) {
+    return vipUserIDs.indexOf(userID) != -1;
 }
 
 /**
- * This is the home page for the demo app. 
+ * This is the home page for the demo app.
  */
 app.get('/', (req, res) => {
     const context = {
@@ -49,20 +49,20 @@ app.get('/', (req, res) => {
  */
 app.get('/landing-page', (req, res) => {
     const userID = req.query.user_id;
-    
+
     const context = {
         user_id: userID,
-        is_showcase_user: isShowcaseUser(userID)
+        is_targeted_user: isVipUser(userID)
     };
-    
+
     res.render('landing-page.html', context);
 });
 
 /**
- * This is the code that should be modified to implement your own version of the advertising API.  
- * 
+ * This is the code that should be modified to implement your own version of the advertising API.
+ *
  * In this example:
- * 
+ *
  * - show how to target known vs. anonymous users
  * - show how to show different ads to different user segments
  * - show how to provide different redirect urls to different user segments
@@ -70,17 +70,21 @@ app.get('/landing-page', (req, res) => {
 app.post('/ad', (req, res) => {
     const userID = req.body.user_id;
 
-    let user = 'Anonymous User';
+    let user = 'anonymous users';
     if (userID) {
-        user = `User ${userID}`;
+        if (isVipUser(userID)) {
+          user = `VIP users`;
+        } else {
+          user = `default users`;
+        }
     }
 
     let color = colors.default;
-    if (isShowcaseUser(userID)) {
-        color = colors.showcase;
+    if (isVipUser(userID)) {
+        color = colors.vip;
     }
 
-    const imageURL = `https://via.placeholder.com/320x100/${color}/FFFFFF.png?text=${encodeURI(`Ad for ${user}`)}`;
+    const imageURL = `https://via.placeholder.com/1200x628/${color}/FFFFFF.png?text=${encodeURI(`Ad for ${user}`)}`;
     let redirectURL = `${baseURL}/landing-page`;
 
     // By adding the user_id as a query parameter in the redirect url here,

@@ -7,6 +7,10 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link rel="stylesheet" href="/demo.css">
         <style>
+            code {
+                font-family: monospace;
+                white-space: pre;
+            }
         </style>
     </head>
     <body class="bg-light">
@@ -14,7 +18,6 @@
             <div class="py-5 text-center">
                 <img class="d-block mx-auto mb-4" src="/mariana-logo.svg" alt="Mariana Tek Logo">
                 <h1>Mariana&nbsp;Tek Advertising&nbsp;Demo</h1>
-                <p class="lead">A simple example of how to use the Mariana Tek Advertising API.</p>
             </div>
 
             <div class="row">
@@ -31,7 +34,7 @@
                         </div>
                         <form id="ad-form" class="card p-2" action="/ad" method="post">
                             <div class="input-group">
-                                <input name="user_id" type="text" class="form-control" placeholder="user_id">
+                                <input name="user_id" type="text" class="form-control" placeholder="user_id" value="123">
                                 <div class="input-group-append">
                                     <button type="submit" class="btn btn-secondary">Submit</button>
                                 </div>
@@ -42,20 +45,44 @@
 
                 <div class="col-md-8 order-md-1">
                     <h2 class="mb-3">Advertise with us</h2>
-                    <p>Mariana Tek's mobile app now allows advertising banners, so that you can reach loyal customers outside of the studio.  Our platform will allow you to:</p>
+                    <p>Mariana Tek's mobile app enables you to serve targeted advertising banners. With Mariana Tek you can host an ad server, allowing you to programatically target user segments.</p>
+                    <hr class="mb-4">
+
+                    <h3 class="mb-3">See it in action</h3>
+                    <p>The "Your Ad" form allows you to demo an example of a live ad server. We'll look at an example of two segments: default users and VIP users.</p>
                     <ul>
-                        <li>Insert an ad image and link it to a URL. For recommendations on the best size of your ad image, contact your account manager.</li>
-                        <li>Serve different ads to different user segments. To see this in action, simply pass in an associated user ID with a segment you would like to target to the example ad here.</li>
+                        <li>Upon initial page load, you are served an ad targetting user 123, a default user.</li>
+                        <li>Click on the ad to see the specified default landing page.</li>
+                        <!-- <li>Since all users of the Mariana Tek mobile app are logged in, you can choose to serve targed ads to specific users and/or segments.</li> -->
+                        <li>Now enter user_id 456 into the form and click Submit. You should see a coral-colored ad that says "Ad for User 456" since this user is in the VIP segment.</li>
+                        <li>Click on the ad to see the specified VIP landing page.</li>
                     </ul>
                     <hr class="mb-4">
-                
-                    <h3 class="mb-3">Create your own Advertising API</h3>
-                    <p>Have the ability to create your own campaigns by following the steps below:</p>
+
+                    <h3 class="mb-3">Create your own ad server</h3>
+                    <p>Serve ads in your app by folowing the steps below:</p>
                     <ul>
-                        <li>Fork the demo repo <a href="https://github.com/mariana-tek/mariana-advertising-demo">here</a>  and modify <a href="https://github.com/Mariana-Tek/mariana-advertising-demo/blob/master/server.js">server.js</a> to create your own ad.</li>
-                        <li>With the forked version, test your implementation of the advertising API with your ad content locally.</li>
-                        <li>As part of your API, implement a response that returns the URL of the image, as well as the URL of the redirect link that you want to be shown for the requesting user.</li>
-                        <li>Once the ad is ready to go live, communicate the URL for your API to your account manager to complete configuration.</li>
+                        <li>
+Implement an endpoint that receives the following JSON request format:
+<code>
+{
+    "user_id": "123",
+}
+
+</code>
+And returns the following JSON response format:
+<code>
+{
+    "image_url": "https://link/to/your/image",
+    "redirect_url": "https://link/to/your/landing/page"
+}
+
+</code>
+                        </li>
+                        <li>Your image should be 1200x628px. Images of other dimensions will result in letter-boxing in the app.</li>
+                        <li>All endpoints, image URLs, and redirect URLs must be served over SSL. Non-secure responses will be rejected.</li>
+                        <li>You can fork this example repo to help expedite bootstrapping your ad server: <a href="https://github.com/mariana-tek/mariana-advertising-demo">https://github.com/mariana-tek/mariana-advertising-demo</a>.</li>
+                        <li>Once your ad servers is ready to go live, communicate the URL of your ad endpoint to your account manager to complete configuration.</li>
                     </ul>
                 </div>
             </div>
