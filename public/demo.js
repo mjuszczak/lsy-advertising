@@ -14,22 +14,25 @@ function updateAd(data, err) {
     }
 
     if (data && !err) {
-        var img = document.createElement('img');
-        img.setAttribute('src', data.image_url);
-        img.setAttribute('alt', 'Advertisement');
+        data.primary_cards.forEach(element => {
+            var img = document.createElement('img');
+            img.setAttribute('src', element.image_url);
+            img.setAttribute('alt', 'Advertisement');
 
-        var a = document.createElement('a');
-        a.setAttribute('href', data.redirect_url);
-        a.setAttribute('target', '_blank');
-        a.appendChild(img);
-        a.addEventListener('click', function(e) {
-            e.preventDefault();
-            window.open(data.redirect_url, null, "height=285,width=550,resizable=1");
+            var a = document.createElement('a');
+            a.setAttribute('href', element.redirect_url);
+            a.setAttribute('target', '_blank');
+            a.appendChild(img);
+            a.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.open(data.redirect_url, null, "height=285,width=550,resizable=1");
+            });
+
+            setTimeout(function() {
+                adContainer.appendChild(a);
+            }, 500);
         });
-
-        setTimeout(function() {
-            adContainer.appendChild(a);
-        }, 500);
+        
     }
 }
 
