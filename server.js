@@ -12,8 +12,10 @@ const baseURL = process.env.BASE_URL || '';
 
 // These variables can be safely removed, they are only used for demo purposes.
 const colors = {
-    default: '210553',
-    vip: 'e43362'
+    default1: '210553',
+    default2: '4d509d',
+    vip1: 'e43362',
+    vip2: 'f199b0'
 }
 const vipUserIDs = ['456', '789'];
 
@@ -79,12 +81,15 @@ app.post('/ad', (req, res) => {
         }
     }
 
-    let color = colors.default;
+    let color1 = colors.default1;
+    let color2 = colors.default2;
     if (isVipUser(userID)) {
-        color = colors.vip;
+        color1 = colors.vip1;
+        color2 = colors.vip2;
     }
 
-    const imageURL = `https://via.placeholder.com/1200x628/${color}/FFFFFF.png?text=${encodeURI(`Ad for ${user}`)}`;
+    const imageURL1 = `https://via.placeholder.com/1200x628/${color1}/FFFFFF.png?text=${encodeURI(`Ad for ${user}`)}`;
+    const imageURL2 = `https://via.placeholder.com/1200x628/${color2}/FFFFFF.png?text=${encodeURI(`Ad for ${user}`)}`;
     let redirectURL = `${baseURL}/landing-page`;
 
     // By adding the user_id as a query parameter in the redirect url here,
@@ -97,8 +102,16 @@ app.post('/ad', (req, res) => {
     // This is the response format required by the Mariana Tek platform to serve your ad. Other response data attributes will not be recogonized.
     // NOTE: All urls must be served via https.
     const adResponse = {
-        image_url: imageURL,
-        redirect_url: redirectURL
+        primary_cards: [
+            {
+                image_url: imageURL1,
+                redirect_url: redirectURL
+            },
+            {
+                image_url: imageURL2,
+                redirect_url: redirectURL
+            }
+        ]
     };
 
     res.send(adResponse);
