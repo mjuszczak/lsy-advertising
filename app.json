@@ -1,8 +1,8 @@
 {
-  "name": "Mariana Advertising Demo",
-  "description": "A simple example of how to use the Mariana Tek Advertising API.",
-  "repository": "https://github.com/mariana-tek/mariana-advertising-demo",
-  "logo": "https://mariana-advertising-demo.herokuapp.com/mariana-logo.svg",
+  "name": "Mariana Advertising Server",
+  "description": "Serves advertisements compatible with the Mariana Tek platform.",
+  "repository": "https://github.com/mjuszczak/lsy-advertising",
+  "logo": "",
   "keywords": ["Mariana", "Tek"],
   "env":{},
   "addons":[],

@@ -1,7 +1,6 @@
-# Mariana Advertising Demo
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/mariana-tek/mariana-advertising-demo)
+# Mariana Advertising Server
 
-A simple example of how to use the Mariana Tek Advertising API.
+Forked and adapted from: https://github.com/Mariana-Tek/mariana-advertising-demo
 
 ## System Dependencies
 - Node.js v10.15

@@ -1,14 +1,14 @@
 {
-  "name": "mariana-advertising-demo",
+  "name": "mariana-advertising-server",
   "version": "1.0.0",
-  "description": "A simple example of how to use the Mariana Tek Advertising API.",
+  "description": "Serves advertisements compatible with the Mariana Tek platform.",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon -e js,html server.js"
   },
-  "author": "Mariana Tek",
-  "license": "MIT",
+  "author": "",
+  "license": "",
   "dependencies": {
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
